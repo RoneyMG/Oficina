@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>Tela de Cadastro</title>
+		
+		<link rel="stylesheet" href="stylelog.css">
+	</head>
+	<style>
+		
+	</style>
+	<body>
+		<!-- TELA INICIAL: Para cadastro de Diretor e Coordenador. -->
+		<!-- Lembrar de só abrir o navegador no XAMP -> Apache -> admin. Se abrir o arquivo na pasta
+			 não vai funcionar o PHP e Mysql. -->
+		<form name="cadUser" method="post" action="cadastro.php">
+			<h3> Cadastro</h3>
+			<div id='msgError' value=""></div>
+			<div id='msgSuccess' value=""></div>
+			<input name="nome" type="text" placeholder="Nome">
+			<input name="email" type="text" placeholder="E-mail">
+			<input name="telefone" type="text" placeholder="Telefone">
+			<input style="margin: 0 15px;" name="tipo" type="radio" value="Diretor" checked>Diretor
+			<input style="margin: 0 15px;"name="tipo" type="radio" value="Coordenador">Coordenador<br>
+			<!--<input name="tipo" type="text" placeholder="Professor[P] ou Aluno[A]?"/>-->
+			<input name="senha" type="password" placeholder="Senha"/>
+			<input name="confsenha" type="password" placeholder="Confirmar senha"/>
+			<input type="submit" name="cadastrar" value="Cadastrar"/>
+			<p>Ir para Login, 
+				<a href='index.html'>clique aqui</a>
+			</p>
+		
+		</form>
+		
+		
+		<script src="script2.js"></script>
+	</body>
+</html>
