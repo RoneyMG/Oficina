@@ -1,5 +1,5 @@
 <?php
-	class Conexao(){
+	class Conexao{
 
 		public $con;
 		
@@ -13,23 +13,24 @@
 		
 		public function desconectar(){
 
-			mysql_close($this->con);
+			mysqli_close($this->con);
 		}
 		
 		public function executar($sql){
-			mysql_query($this->con,$sql); /*cadastro será a tabela da pagina cadastro*/
+			mysqli_query($this->con,$sql); /*cadastro será a tabela da pagina cadastro*/
 			return mysqli_affected_rows($this->con);
 		}
 		
 		public function selecionar($sql){
 			
-			$result = mysql_query($sql);
+			$result = mysqli_query($sql);
 			$lista=array();
 
 			while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 				$lista[$row]=$row;
 			}
 			return $lista;
+
 
 		}
 
