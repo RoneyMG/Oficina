@@ -21,20 +21,18 @@
 			return mysqli_affected_rows($this->con);
 		}
 		
-		public function selecionar($sql){
+		public function buscar($sql){
 			
-			$result = mysqli_query($sql);
+			$result = mysqli_query($this->con, $sql);
 			$lista=array();
 
-			while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-				$lista[$row]=$row;
+			while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+				array_push($lista, $row);
 			}
 			return $lista;
 
 
 		}
-
-		
 		
 	}
 ?>

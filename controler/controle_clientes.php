@@ -10,8 +10,17 @@
             
         }
 
-        function buscar(){
+        function buscarId($id){
 
+            return $this->daoCliente->buscarId($id);
+
+            
+        }
+        function buscar($texto){
+
+            return $this->daoCliente->buscar($texto);
+
+            
         }
         function inserir(Cliente $c){
             if (empty($c->getNome()))
@@ -29,7 +38,7 @@
 
             $this->daoCliente->atualizar($c);
         }
-        function deletar(){
+        function deletar(Cliente $c){
             $this->daoCliente->deletar($c);
         }
         function validaCPF($cpf) {
