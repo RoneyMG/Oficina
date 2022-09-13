@@ -6,7 +6,7 @@
         public $daoCliente;
 
         function __construct(){
-            $this->daoCliente = new DaoClientes();
+            $this->daoCliente = new DaoClientes(); 
             
         }
 

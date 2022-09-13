@@ -5,6 +5,7 @@
         public $nome;
         public $cpf;
         public $telefone;
+        public $endereco;:Endereco
 
         public function getId(){
             return $this->id;
@@ -29,6 +30,12 @@
         }
         public function setTelefone($telefone){
             $this->telefone = $telefone;
+        }
+        public function getEndereco(){
+            return $this->endereco;
+        }
+        public function setEndereco($endereco){
+            $this->endereco = $endereco;
         }
 
     }
