@@ -9,4 +9,5 @@
         public function setTexto($texto){
             $this->texto = $texto;
         }
+	}	
 ?>

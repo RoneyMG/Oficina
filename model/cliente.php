@@ -5,7 +5,7 @@
         public $nome;
         public $cpf;
         public $telefone;
-        public $endereco;:Endereco
+        public $endereco;
 
         public function getId(){
             return $this->id;

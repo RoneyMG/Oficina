@@ -21,11 +21,15 @@
             
             $this->con->conectar();
             $retorno = $this->con->buscar($sql);
+			
+			if (empty($retorno))
+				return new Cliente();
+			
             $cli->setId($retorno[0]['id']);
             $cli->setNome($retorno[0]['nome']);
             $cli->setCpf($retorno[0]['cpf']);
             $cli->setTelefone($retorno[0]['telefone']);
-            $cli->serEndereco($retorno[0]['endereco']);//Para o ENDEREÇO
+            $cli->setEndereco($retorno[0]['endereco']);//Para o ENDEREÇO
 
             $this->con->desconectar();
             return $cli;
@@ -60,7 +64,7 @@
         function inserir(Cliente $c){
             
             //CÓDIGO DE INSERIR - INSERT
-            $sql = "INSERT INTO clientes (nome, cpf, telefone, endereco) VALUES ('".$c->getNome()."', '".$c->getCpf()."', '".$c->getTelefone()."', '".$c->tegEndereco()."')";
+            $sql = "INSERT INTO clientes (nome, cpf, telefone, endereco) VALUES ('".$c->getNome()."', '".$c->getCpf()."', '".$c->getTelefone()."', '".$c->getEndereco()."')";
             
             $this->con->conectar();
             $this->con->executar($sql);
