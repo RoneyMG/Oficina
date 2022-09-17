@@ -6,8 +6,6 @@
 
     $controleCliente = new ControlerClientes();
 
-
-
     $cliente = new Cliente();
     $cliente->setId(2);
     $cliente->setNome("Jailson");
@@ -19,15 +17,15 @@
 
     //=== FUNÇÕES CHAMADAS - 1 POR VEZ ===
     $cliente = $controleCliente->buscarId(2);
-    echo "<pre>";
+    //echo "<pre>";
     //print_r($retorno);
-    print_r($cliente);
-    echo "</pre>";
-    $clientes = $controleCliente->buscar('jailson');
-    echo "<pre>";
-    //print_r($retorno);
-    print_r($clientes);
-    echo "</pre>"
+    //print_r($cliente);
+    //echo "</pre>";
+    $clientes = $controleCliente->buscar("");
+    $clientes_json = json_encode( $clientes);
+
+    echo $clientes_json;
+
     //$controleCliente->inserir($cliente);
     //$controleCliente->atualizar($cliente);
     //$controleCliente->deletar($cliente);

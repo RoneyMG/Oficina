@@ -1,6 +1,6 @@
 <?php
 
-    require_once ("model/dao/dao_cliente.php");
+    require_once ("../model/dao/dao_cliente.php");
 
     class ControlerClientes{
         public $daoCliente;
@@ -13,8 +13,6 @@
         function buscarId($id){
 
             return $this->daoCliente->buscarId($id);
-
-            
         }
         function buscar($texto){
 

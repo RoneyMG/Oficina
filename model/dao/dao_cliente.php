@@ -1,6 +1,6 @@
 <?php
 
-    require_once ("config/conexao.php");
+    require_once ("../config/conexao.php");
 
     class DaoClientes{
 
@@ -8,8 +8,6 @@
 
         function __construct(){
             $this->con = new Conexao();
-            
-
         }
 
         function buscarId($id){
