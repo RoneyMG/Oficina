@@ -1,13 +1,55 @@
-<?php
+﻿<?php
 
-require_once ("../controler/controle_clientes.php");
-require_once ("../model/cliente.php");
+    require_once ("../controler/controle_clientes.php");
+    require_once ("../model/cliente.php");
 
-$controleCliente = new ControlerClientes();
+//    print_r($_SERVER['REQUEST_METHOD']);
 
-$clientes = $controleCliente->buscar("");
-$clientes_json = json_encode( $clientes);
+    switch($_SERVER['REQUEST_METHOD'])
+    {
+       
+        case 'POST': POST($_POST); break;
+        case 'PUT': PUT($_PUT); break;
+        case 'DELETE': DELETE(); break;
+        default : GET($_GET); break;
 
-echo $clientes_json;
+    }
+
+    function GET($busca){
+        
+        $controleCliente = new ControlerClientes();
+
+        $clientes = $controleCliente->buscar("");
+        $clientes_json = json_encode($clientes);
+    
+        echo $clientes_json;
+
+    }
+
+    function POST($cli){
+
+        $cliente = array_key_first($cli);
+        $cli = json_decode($cliente);
+        $controleCliente = new ControlerClientes();
+        $c = new Cliente();
+
+        $c->nome = $cli->nome;
+        $c->telefone = $cli->telefone;
+        $c->cpf = $cli->cpf;
+        $c->endereco = $cli->endereco;
+        
+        $controleCliente->inserir($c);
+
+    }
+    function DELETE(){
+
+        $idCLiente = file_get_contents('php://input');
+
+        $controleCliente = new ControlerClientes();
+        $c = new Cliente();
+        
+        $controleCliente->deletar($idCLiente);
+
+    }
 
 ?>

@@ -36,11 +36,10 @@
 
             $this->daoCliente->atualizar($c);
         }
-        function deletar(Cliente $c){
-            $this->daoCliente->deletar($c);
+        function deletar($id){
+            $this->daoCliente->deletar($id);
         }
         function validaCPF($cpf) {
- 
             // Extrai somente os números
             $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
              

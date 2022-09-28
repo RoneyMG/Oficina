@@ -80,19 +80,15 @@
             $this->con->executar($sql);
             $this->con->desconectar();
         }
-        function deletar(Cliente $c){
+        function deletar($id){
 
             //CÓDIGO DE DELETAR - DELETE
             //====================== !!!!!!!!!!!!!!!!!! acertar o comando Mysql !!!!!!!!!!!!!!! ========================
-            $sql = "DELETE FROM clientes WHERE id=".$c->getId();
+            $sql = "DELETE FROM clientes WHERE id=". $id;
 
             $this->con->conectar();
             $this->con->executar($sql);
             $this->con->desconectar();
         }
-
     }
-
-
-
 ?>
