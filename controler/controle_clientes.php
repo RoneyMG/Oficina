@@ -1,17 +1,14 @@
 <?php
 
-    require_once ("../model/dao/dao_cliente.php");
+    require_once ("model/dao/dao_cliente.php");
 
     class ControlerClientes{
         public $daoCliente;
 
         function __construct(){
             $this->daoCliente = new DaoClientes(); 
-            
         }
-
         function buscarId($id){
-
             return $this->daoCliente->buscarId($id);
         }
         function buscar($texto){
@@ -36,10 +33,11 @@
 
             $this->daoCliente->atualizar($c);
         }
-        function deletar($id){
-            $this->daoCliente->deletar($id);
+        function deletar(Cliente $c){
+            $this->daoCliente->deletar($c);
         }
         function validaCPF($cpf) {
+ 
             // Extrai somente os números
             $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
              

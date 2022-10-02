@@ -2,7 +2,7 @@
 
     require_once ("config/conexao.php");
 
-    class DaoClientes{
+    class DaoPecas{
 
         public $con;
 
@@ -13,24 +13,22 @@
         function buscarId($id){
 
             //CÓDIGO DE BUSCAR - SELECT
-            $cli = new Cliente();
+            $pc = new Peca();
 
-            $sql="SELECT * FROM clientes WHERE id=".$id;
+            //criar SQL para buscar servicos
+            $sql="SELECT * FROM pecas WHERE id=".$id;
             
             $this->con->conectar();
             $retorno = $this->con->buscar($sql);
 			
 			if (empty($retorno))
-				return new Cliente();
+				return new Peca();
 			
-            $cli->setId($retorno[0]['id']);
-            $cli->setNome($retorno[0]['nome']);
-            $cli->setCpf($retorno[0]['cpf']);
-            $cli->setTelefone($retorno[0]['telefone']);
-            $cli->setEndereco($retorno[0]['endereco']);//Para o ENDEREÇO
-
+            $pc->setId($retorno[0]['id']);
+            $pc->setNome($retorno[0]['nome']);
+            
             $this->con->desconectar();
-            return $cli;
+            return $pc;
         }
 
         function buscar($texto){
@@ -38,41 +36,38 @@
             //CÓDIGO DE BUSCAR - SELECT
             $lista = array();
 
-            $sql="SELECT * FROM clientes WHERE nome LIKE '%".$texto."%' OR cpf LIKE '%".$texto."%';";
+            $sql="SELECT * FROM pecas WHERE nome LIKE '%".$texto."%' OR id LIKE '%".$texto."%';";
             
             //========== !!!!!!!!!!!!!! acertar a exibição da busca no Mysql !!!!!!!!!!!!!!!!!! =============
             
             $this->con->conectar();
             $retorno = $this->con->buscar($sql);
             foreach ($retorno as $r){
-                $cliente = new Cliente();
+                $peca = new Peca();
                 
-                $cliente->setId($r['id']);
-                $cliente->setNome($r['nome']);
-                $cliente->setCpf($r['cpf']);
-                $cliente->setTelefone($r['telefone']);
-                $cliente->setEndereco($r['endereco']);//Para o ENDEREÇO
-
-                array_push($lista, $cliente);
+                $peca->setId($r['id']);
+                $peca->setNome($r['nome']);
+            
+                array_push($lista, $peca);
             }
             $this->con->desconectar();
             return $lista;
 
         }
-        function inserir(Cliente $c){
+        function inserir(Peca $p){
             
             //CÓDIGO DE INSERIR - INSERT
-            $sql = "INSERT INTO clientes (nome, cpf, telefone, endereco) VALUES ('".$c->getNome()."', '".$c->getCpf()."', '".$c->getTelefone()."', '".$c->getEndereco()."')";
+            $sql = "INSERT INTO pecas (nome) VALUES ('".$p->getNome()."')";
             
             $this->con->conectar();
             $this->con->executar($sql);
             $this->con->desconectar();
 
         }
-        function atualizar(Cliente $c){
+        function atualizar(Peca $p){
 
             //CÓDIGO DE ATUALIZAR - UPDATE
-            $sql = "UPDATE clientes SET nome = '".$c->getNome()."', cpf = '".$c->getCpf()."', telefone = '".$c->getTelefone()."', endereco = '".$c->getEndereco()."' WHERE id='".$c->getId()."'";
+            $sql = "UPDATE pecas SET nome = '".$p->getNome()."' WHERE id='".$p->getId()."'";
 
             //die($sql);
 
@@ -80,17 +75,16 @@
             $this->con->executar($sql);
             $this->con->desconectar();
         }
-        function deletar(Cliente $c){
+        function deletar(Peca $p){
 
             //CÓDIGO DE DELETAR - DELETE
             //====================== !!!!!!!!!!!!!!!!!! acertar o comando Mysql !!!!!!!!!!!!!!! ========================
-            $sql = "DELETE FROM clientes WHERE id=".$c->getId();
+            $sql = "DELETE FROM pecas WHERE id=".$p->getId();
 
             $this->con->conectar();
             $this->con->executar($sql);
             $this->con->desconectar();
         }
-
     }
 
 

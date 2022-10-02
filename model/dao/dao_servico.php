@@ -2,35 +2,36 @@
 
     require_once ("config/conexao.php");
 
-    class DaoClientes{
+    class DaoServicos{
 
         public $con;
 
         function __construct(){
             $this->con = new Conexao();
+            
+
         }
 
         function buscarId($id){
 
             //CÓDIGO DE BUSCAR - SELECT
-            $cli = new Cliente();
+            $serv = new Servico();
 
-            $sql="SELECT * FROM clientes WHERE id=".$id;
+            //criar SQL para buscar servicos
+            $sql="SELECT * FROM servicos WHERE id=".$id;
             
             $this->con->conectar();
             $retorno = $this->con->buscar($sql);
 			
 			if (empty($retorno))
-				return new Cliente();
+				return new Servico();
 			
-            $cli->setId($retorno[0]['id']);
-            $cli->setNome($retorno[0]['nome']);
-            $cli->setCpf($retorno[0]['cpf']);
-            $cli->setTelefone($retorno[0]['telefone']);
-            $cli->setEndereco($retorno[0]['endereco']);//Para o ENDEREÇO
+            $serv->setId($retorno[0]['id']);
+            $serv->setNome($retorno[0]['nome']);
+            
 
             $this->con->desconectar();
-            return $cli;
+            return $serv;
         }
 
         function buscar($texto){
@@ -38,41 +39,38 @@
             //CÓDIGO DE BUSCAR - SELECT
             $lista = array();
 
-            $sql="SELECT * FROM clientes WHERE nome LIKE '%".$texto."%' OR cpf LIKE '%".$texto."%';";
+            $sql="SELECT * FROM servicos WHERE nome LIKE '%".$texto."%' OR id LIKE '%".$texto."%';";
             
             //========== !!!!!!!!!!!!!! acertar a exibição da busca no Mysql !!!!!!!!!!!!!!!!!! =============
             
             $this->con->conectar();
             $retorno = $this->con->buscar($sql);
             foreach ($retorno as $r){
-                $cliente = new Cliente();
+                $servico = new Servico();
                 
-                $cliente->setId($r['id']);
-                $cliente->setNome($r['nome']);
-                $cliente->setCpf($r['cpf']);
-                $cliente->setTelefone($r['telefone']);
-                $cliente->setEndereco($r['endereco']);//Para o ENDEREÇO
-
-                array_push($lista, $cliente);
+                $servico->setId($r['id']);
+                $servico->setNome($r['nome']);
+            
+                array_push($lista, $servico);
             }
             $this->con->desconectar();
             return $lista;
 
         }
-        function inserir(Cliente $c){
+        function inserir(Servico $s){
             
             //CÓDIGO DE INSERIR - INSERT
-            $sql = "INSERT INTO clientes (nome, cpf, telefone, endereco) VALUES ('".$c->getNome()."', '".$c->getCpf()."', '".$c->getTelefone()."', '".$c->getEndereco()."')";
+            $sql = "INSERT INTO servicos (nome) VALUES ('".$s->getNome()."')";
             
             $this->con->conectar();
             $this->con->executar($sql);
             $this->con->desconectar();
 
         }
-        function atualizar(Cliente $c){
+        function atualizar(Servico $s){
 
             //CÓDIGO DE ATUALIZAR - UPDATE
-            $sql = "UPDATE clientes SET nome = '".$c->getNome()."', cpf = '".$c->getCpf()."', telefone = '".$c->getTelefone()."', endereco = '".$c->getEndereco()."' WHERE id='".$c->getId()."'";
+            $sql = "UPDATE servicos SET nome = '".$s->getNome()."' WHERE id='".$s->getId()."'";
 
             //die($sql);
 
@@ -80,17 +78,16 @@
             $this->con->executar($sql);
             $this->con->desconectar();
         }
-        function deletar(Cliente $c){
+        function deletar(Servico $s){
 
             //CÓDIGO DE DELETAR - DELETE
             //====================== !!!!!!!!!!!!!!!!!! acertar o comando Mysql !!!!!!!!!!!!!!! ========================
-            $sql = "DELETE FROM clientes WHERE id=".$c->getId();
+            $sql = "DELETE FROM servicos WHERE id=".$s->getId();
 
             $this->con->conectar();
             $this->con->executar($sql);
             $this->con->desconectar();
         }
-
     }
 
 
