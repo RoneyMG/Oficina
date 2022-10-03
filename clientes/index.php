@@ -3,16 +3,14 @@
     require_once ("../controler/controle_clientes.php");
     require_once ("../model/cliente.php");
 
-//    print_r($_SERVER['REQUEST_METHOD']);
+    //print_r($_SERVER['REQUEST_METHOD']);
 
     switch($_SERVER['REQUEST_METHOD'])
     {
-       
-        case 'POST': POST($_POST); break;
+        case 'POST': POST(); break;
         case 'PUT': PUT($_PUT); break;
         case 'DELETE': DELETE(); break;
         default : GET($_GET); break;
-
     }
 
     function GET($busca){
@@ -26,9 +24,10 @@
 
     }
 
-    function POST($cli){
+    function POST(){
 
-        $cliente = array_key_first($cli);
+        $cliente = file_get_contents('php://input');
+
         $cli = json_decode($cliente);
         $controleCliente = new ControlerClientes();
         $c = new Cliente();
@@ -39,7 +38,6 @@
         $c->endereco = $cli->endereco;
         
         $controleCliente->inserir($c);
-
     }
     function DELETE(){
 
