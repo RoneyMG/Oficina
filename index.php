@@ -2,7 +2,7 @@
 
     require_once ("controler/controle_clientes.php");
     require_once ("model/cliente.php");
-    require_once ("model/endereco.php");
+    require_once ("model/peca.php");
 
     $controleCliente = new ControlerClientes();
 
