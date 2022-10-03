@@ -1,5 +1,5 @@
 <?php
-	
+	//COMENTÁRIO TESTE GIT BASH
 	class Cliente{
         public $id;
         public $nome;
@@ -37,9 +37,5 @@
         public function setEndereco($endereco){
             $this->endereco = $endereco;
         }
-
     }
-
-
-	
 ?>

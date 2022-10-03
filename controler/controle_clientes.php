@@ -7,14 +7,9 @@
 
         function __construct(){
             $this->daoCliente = new DaoClientes(); 
-            
         }
-
         function buscarId($id){
-
             return $this->daoCliente->buscarId($id);
-
-            
         }
         function buscar($texto){
 

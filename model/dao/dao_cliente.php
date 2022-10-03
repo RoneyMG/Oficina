@@ -8,8 +8,6 @@
 
         function __construct(){
             $this->con = new Conexao();
-            
-
         }
 
         function buscarId($id){
