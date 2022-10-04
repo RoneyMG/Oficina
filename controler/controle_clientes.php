@@ -1,6 +1,6 @@
 <?php
 
-    require_once ("model/dao/dao_cliente.php");
+    require_once ("../model/dao/dao_cliente.php");
 
     class ControlerClientes{
         public $daoCliente;
@@ -33,7 +33,7 @@
 
             $this->daoCliente->atualizar($c);
         }
-        function deletar(Cliente $c){
+        function deletar($c){
             $this->daoCliente->deletar($c);
         }
         function validaCPF($cpf) {

@@ -1,5 +1,5 @@
 <?php
-    require_once ("model/dao/dao_peca.php");
+    require_once ("../model/dao/dao_peca.php");
 
     class ControlerPecas{
         public $daoPeca;

@@ -1,6 +1,6 @@
 <?php
 
-    require_once ("config/conexao.php");
+    require_once ("../onfig/conexao.php");
 
     class DaoPecas{
 
