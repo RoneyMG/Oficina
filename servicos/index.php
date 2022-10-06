@@ -1,7 +1,7 @@
 <?php
 
-    require_once ("controler/controle_servicos.php");
-    require_once ("model/servico.php");
+    require_once ("../controler/controle_servicos.php");
+    require_once ("../model/servico.php");
 
     $controleServico = new ControlerServicos();
 
@@ -13,17 +13,16 @@
     
 
     //=== FUNÇÕES CHAMADAS - 1 POR VEZ ===
+    //$controleServico->inserir($servico);
     //$servico = $controleServico->buscarId(2);
-    //echo "<pre>";
-    //print_r($retorno);
-    //print_r($cliente);
-    //echo "</pre>";
-    //$servicos = $controleServico->buscar("");
-    //$servicos_json = json_encode( $servicos);
+    $servicos = $controleServico->buscar("2005");
+    $servicos_json = json_encode( $servicos);
 
-    //echo $servicos_json;
+    echo $servicos_json;
 
-    $controleServico->inserir($servico);
+    
+
+
     //$controleCliente->atualizar($cliente);
     //$controleCliente->deletar($cliente);
 

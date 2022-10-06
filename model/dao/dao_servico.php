@@ -1,6 +1,6 @@
 <?php
 
-    require_once ("config/conexao.php");
+    require_once ("../config/conexao.php");
 
     class DaoServicos{
 
@@ -8,8 +8,6 @@
 
         function __construct(){
             $this->con = new Conexao();
-            
-
         }
 
         function buscarId($id){
@@ -25,13 +23,21 @@
 			
 			if (empty($retorno))
 				return new Servico();
-			
-            $serv->setId($retorno[0]['id']);
-            $serv->setNome($retorno[0]['nome']);
-            
+			$serv = $this->preencherServicos($retorno[0]);
 
             $this->con->desconectar();
             return $serv;
+        }
+
+        function preencherServicos($servico){
+            $s = new Servico();
+            $s->setId($servico['id']);
+            $s->setNome($servico['nome']);
+            $s->setDescricao($servico['descricao']);
+            $s->setValor($servico['valor']);
+
+            return $s;
+
         }
 
         function buscar($texto){
@@ -39,18 +45,16 @@
             //CÓDIGO DE BUSCAR - SELECT
             $lista = array();
 
-            $sql="SELECT * FROM servicos WHERE nome LIKE '%".$texto."%' OR id LIKE '%".$texto."%';";
+            $sql="SELECT * FROM servicos WHERE nome LIKE '%".$texto."%' OR descricao LIKE '%".$texto."%';";
             
             //========== !!!!!!!!!!!!!! acertar a exibição da busca no Mysql !!!!!!!!!!!!!!!!!! =============
             
             $this->con->conectar();
             $retorno = $this->con->buscar($sql);
             foreach ($retorno as $r){
-                $servico = new Servico();
+
+                $servico = $this->preencherServicos($r);    
                 
-                $servico->setId($r['id']);
-                $servico->setNome($r['nome']);
-            
                 array_push($lista, $servico);
             }
             $this->con->desconectar();
@@ -60,7 +64,7 @@
         function inserir(Servico $s){
             
             //CÓDIGO DE INSERIR - INSERT
-            $sql = "INSERT INTO servicos (nome) VALUES ('".$s->getNome()."')";
+            $sql = "INSERT INTO servicos (nome, descricao, valor) VALUES ('".$s->getNome()."', '".$s->getDescricao()."', '".$s->getValor()."')";
             
             $this->con->conectar();
             $this->con->executar($sql);

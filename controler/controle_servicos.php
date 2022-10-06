@@ -1,6 +1,6 @@
 <?php
     //criar dao servico!!!!!!!!!!
-    require_once ("model/dao/dao_servico.php");
+    require_once ("../model/dao/dao_servico.php");
 
     class ControlerServicos{
         public $daoServico;

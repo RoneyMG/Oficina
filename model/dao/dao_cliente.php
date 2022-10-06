@@ -1,6 +1,6 @@
 <?php
 
-    require_once ("config/conexao.php");
+    require_once ("../config/conexao.php");
 
     class DaoClientes{
 
@@ -80,11 +80,11 @@
             $this->con->executar($sql);
             $this->con->desconectar();
         }
-        function deletar(Cliente $c){
+        function deletar($c){
 
             //CÓDIGO DE DELETAR - DELETE
             //====================== !!!!!!!!!!!!!!!!!! acertar o comando Mysql !!!!!!!!!!!!!!! ========================
-            $sql = "DELETE FROM clientes WHERE id=".$c->getId();
+            $sql = "DELETE FROM clientes WHERE id=".$c;
 
             $this->con->conectar();
             $this->con->executar($sql);

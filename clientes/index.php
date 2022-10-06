@@ -44,8 +44,7 @@
         $idCLiente = file_get_contents('php://input');
 
         $controleCliente = new ControlerClientes();
-        $c = new Cliente();
-        
+                
         $controleCliente->deletar($idCLiente);
 
     }
