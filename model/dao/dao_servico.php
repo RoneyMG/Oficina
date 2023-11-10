@@ -74,7 +74,7 @@
         function atualizar(Servico $s){
 
             //CÓDIGO DE ATUALIZAR - UPDATE
-            $sql = "UPDATE servicos SET nome = '".$s->getNome()."' WHERE id='".$s->getId()."'";
+            $sql = "UPDATE servicos SET nome = '".$s->getNome()."', descricao = '".$s->getDescricao()."', valor = '".$s->getValor()."' WHERE id='".$s->getId()."'";
 
             //die($sql);
 
@@ -84,8 +84,6 @@
         }
         function deletar(Servico $s){
 
-            //CÓDIGO DE DELETAR - DELETE
-            //====================== !!!!!!!!!!!!!!!!!! acertar o comando Mysql !!!!!!!!!!!!!!! ========================
             $sql = "DELETE FROM servicos WHERE id=".$s->getId();
 
             $this->con->conectar();
