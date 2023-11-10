@@ -3,27 +3,48 @@
     require_once ("../controler/controle_servicos.php");
     require_once ("../model/servico.php");
 
-    $controleServico = new ControlerServicos();
+	switch($_SERVER['REQUEST_METHOD'])
+    {
+        case 'POST': POST(); break;
+        case 'PUT': PUT($_PUT); break;
+        case 'DELETE': DELETE(); break;
+        default : GET($_GET); break;
+    }
 
-    $servico = new Servico();
-    $servico->setId(2);
-    $servico->setNome("Retentor de comando");
-    $servico->setDescricao("Retentor do Gol 1.0 2005 8v");
-    $servico->setValor("10.20");
+	function GET($busca){
+        
+        $controleServico = new ControlerServicos();
+
+        $Servicos = $controleServico->buscar("");
+        $Servicos_json = json_encode($Servicos);
     
+        echo $Servicos_json;
 
-    //=== FUNÇÕES CHAMADAS - 1 POR VEZ ===
-    //$controleServico->inserir($servico);
-    //$servico = $controleServico->buscarId(2);
-    $servicos = $controleServico->buscar("2005");
-    $servicos_json = json_encode( $servicos);
+    }
 
-    echo $servicos_json;
+    function POST(){
 
-    
+        $Servico = file_get_contents('php://input');
 
+        $cli = json_decode($Servico);
+        $controleServico = new ControlerServicos();
+        $c = new Servico();
 
-    //$controleCliente->atualizar($cliente);
-    //$controleCliente->deletar($cliente);
+        $c->nome = $cli->nome;
+        $c->telefone = $cli->telefone;
+        $c->cpf = $cli->cpf;
+        $c->endereco = $cli->endereco;
+        
+        $controleServico->inserir($c);
+    }
+    function DELETE(){
+
+        $idServico = file_get_contents('php://input');
+
+        $controleServico = new ControlerServicos();
+                
+        $controleServico->deletar($idServico);
+
+    }
 
 ?>
