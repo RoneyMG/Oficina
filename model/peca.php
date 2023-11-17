@@ -31,7 +31,4 @@
             $this->valor = $valor;
         }
     }
-
-
-	
 ?>

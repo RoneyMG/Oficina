@@ -12,10 +12,7 @@
             return $this->daoCliente->buscarId($id);
         }
         function buscar($texto){
-
             return $this->daoCliente->buscar($texto);
-
-            
         }
         function inserir(Cliente $c){
             if (empty($c->getNome()))
@@ -24,7 +21,6 @@
                 die("CPF Inválido.");
             if (empty($c->getTelefone()))
                 die("Informe o Nome para salvar.");
-            
             $this->daoCliente->inserir($c);
         }
         function atualizar(Cliente $c){
@@ -33,14 +29,12 @@
 
             $this->daoCliente->atualizar($c);
         }
-        function deletar($c){
+        function deletar($c){//Ver se na funcao é para inserir Cliente.
             $this->daoCliente->deletar($c);
         }
         function validaCPF($cpf) {
- 
             // Extrai somente os números
             $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
-             
             // Verifica se foi informado todos os digitos corretamente
             if (strlen($cpf) != 11) {
                 return false;
@@ -61,9 +55,5 @@
             }
             return true;
         }
-
     }
-
-
-
 ?>

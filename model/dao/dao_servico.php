@@ -3,7 +3,6 @@
     require_once ("../config/conexao.php");
 
     class DaoServicos{
-
         public $con;
 
         function __construct(){
@@ -14,7 +13,6 @@
 
             //CÓDIGO DE BUSCAR - SELECT
             $serv = new Servico();
-
             //criar SQL para buscar servicos
             $sql="SELECT * FROM servicos WHERE id=".$id;
             
@@ -23,38 +21,44 @@
 			
 			if (empty($retorno))
 				return new Servico();
-			$serv = $this->preencherServicos($retorno[0]);
+			
+            $serv->setId($retorno[0]['id']);
+            $serv->setNome($retorno[0]['nome']);
+            $serv->setDescricao($retorno[0]['descricao']);
+            $serv->setValor($retorno[0]['valor']);
+            //$serv = $this->preencherServicos($retorno[0]);
 
             $this->con->desconectar();
             return $serv;
         }
 
-        function preencherServicos($servico){
+        /*function preencherServicos($servico){
             $s = new Servico();
             $s->setId($servico['id']);
             $s->setNome($servico['nome']);
             $s->setDescricao($servico['descricao']);
             $s->setValor($servico['valor']);
-
             return $s;
-
-        }
+        }*/
 
         function buscar($texto){
 
             //CÓDIGO DE BUSCAR - SELECT
             $lista = array();
 
-            $sql="SELECT * FROM servicos WHERE nome LIKE '%".$texto."%' OR descricao LIKE '%".$texto."%';";
+            $sql="SELECT * FROM servicos WHERE nome LIKE '%".$texto."%';";
             
             //========== !!!!!!!!!!!!!! acertar a exibição da busca no Mysql !!!!!!!!!!!!!!!!!! =============
             
             $this->con->conectar();
             $retorno = $this->con->buscar($sql);
             foreach ($retorno as $r){
-
-                $servico = $this->preencherServicos($r);    
-                
+                //$servico = $this->preencherServicos($r);    
+                $peca = new Peca();
+                $peca->setId($r[0]['id']);
+                $peca->setNome($r[0]['nome']);
+                $peca->setDescricao($r[0]['descricao']);
+                $peca->setValor($r[0]['valor']);
                 array_push($lista, $servico);
             }
             $this->con->desconectar();
@@ -84,14 +88,12 @@
         }
         function deletar(Servico $s){
 
-            $sql = "DELETE FROM servicos WHERE id=".$s->getId();
+            //$sql = "DELETE FROM servicos WHERE id=".$s->getId();
+            $sql = "DELETE FROM servicos WHERE id=".$s;
 
             $this->con->conectar();
             $this->con->executar($sql);
             $this->con->desconectar();
         }
     }
-
-
-
 ?>

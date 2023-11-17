@@ -3,7 +3,6 @@
     require_once ("../config/conexao.php");
 
     class DaoClientes{
-
         public $con;
 
         function __construct(){
@@ -90,9 +89,5 @@
             $this->con->executar($sql);
             $this->con->desconectar();
         }
-
     }
-
-
-
 ?>

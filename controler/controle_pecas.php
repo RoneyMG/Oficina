@@ -16,6 +16,10 @@
         function inserir(Peca $p){
             if (empty($p->getNome()))
                 die("Informe o Nome para salvar.");
+            if (empty($s->getDescricao()))
+                die("Informe a descrição.");
+            if (empty($s->getValor()))
+                die("Informe o valor.");
             $this->daoPeca->inserir($p);
         }
         function atualizar(Peca $p){
@@ -24,11 +28,8 @@
 
             $this->daoPeca->atualizar($p);
         }
-        function deletar(Peca $p){
+        function deletar($p){//Ver se na funcao é para inserir Peca.
             $this->daoPeca->deletar($p);
         }
     }
-
-
-
 ?>

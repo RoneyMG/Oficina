@@ -16,6 +16,10 @@
         function inserir(Servico $s){
             if (empty($s->getNome()))
                 die("Informe o Nome para salvar.");
+            if (empty($s->getDescricao()))
+                die("Informe a descrição.");
+            if (empty($s->getValor()))
+                die("Informe o valor.");
             $this->daoServico->inserir($s);
         }
         function atualizar(Servico $s){
@@ -23,12 +27,9 @@
                 die("Informe o ID.");
             $this->daoServico->atualizar($s);
         }
-        function deletar(Servico $s){
+        function deletar($s){
             $this->daoServico->deletar($s);
         }
         //----  Inserir Echo confirmando o "Serviço deletado"!!!!   ----
     }
-
-
-
 ?>

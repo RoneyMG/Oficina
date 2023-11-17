@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Tela de Cadastro de Serviços</title>
+        <link rel="stylesheet" href="stylelog.css">
+    </head>
+    <style>
+
+    </style>
+    <body>
+        <!--!!!Confirmar se o Action esta correto cadastro.php!!!-->
+        <form name="cadServico" method="post" action="cadastro.php">
+            <h3> Cadastro de Serviços </h3>
+            <div id='msgError' value=""></div>
+            <div id='msgSuccess' value=""></div>
+            <input name="nome" type="text" placeholder="Nome">
+            <input name="descricao" type="text" placeholder="Nome">
+            <input name="valor" type="number" placeholder="Nome">
+            <input style="margin: 0 15px;" name="tipo" type="radio" value="Diretor" checked>Diretor
+			<input style="margin: 0 15px;"name="tipo" type="radio" value="Coordenador">Coordenador<br>
+			<!--<input name="tipo" type="text" placeholder="Professor[P] ou Aluno[A]?"/>-->
+			<input name="senha" type="password" placeholder="Senha"/>
+			<input name="confsenha" type="password" placeholder="Confirmar senha"/>
+			<input type="submit" name="cadastrar" value="Cadastrar"/>
+
+
+        </form>
+    </body>
+</html>  

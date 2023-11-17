@@ -3,7 +3,6 @@
     require_once ("../config/conexao.php");
 
     class DaoPecas{
-
         public $con;
 
         function __construct(){
@@ -14,7 +13,6 @@
 
             //CÓDIGO DE BUSCAR - SELECT
             $pc = new Peca();
-
             //criar SQL para buscar servicos
             $sql="SELECT * FROM pecas WHERE id=".$id;
             
@@ -38,7 +36,7 @@
             //A variável é texto, pois ela vai receber nome ou id que será verificado no banco pelo SELECT.
             $lista = array();
 
-            $sql="SELECT * FROM pecas WHERE nome LIKE '%".$texto."%' OR id LIKE '%".$texto."%';";
+            $sql="SELECT * FROM pecas WHERE nome LIKE '%".$texto."%';";
             
             //========== !!!!!!!!!!!!!! acertar a exibição da busca no Mysql !!!!!!!!!!!!!!!!!! =============
             
@@ -46,12 +44,10 @@
             $retorno = $this->con->buscar($sql);
             foreach ($retorno as $r){
                 $peca = new Peca();
-                
-                $peca->setId($retorno[0]['id']);
-                $peca->setNome($retorno[0]['nome']);
-                $peca->setDescricao($retorno[0]['descricao']);
-                $peca->setValor($retorno[0]['valor']);
-            
+                $peca->setId($r['id']);
+                $peca->setNome($r['nome']);
+                $peca->setDescricao($r['descricao']);
+                $peca->setValor($r['valor']);
                 array_push($lista, $peca);
             }
             $this->con->desconectar();
@@ -71,7 +67,7 @@
         function atualizar(Peca $p){
 
             //CÓDIGO DE ATUALIZAR - UPDATE
-            $sql = "UPDATE pecas SET nome = '".$p->getNome()."', descricao = '".$p->getDescricao()."', valor = '".$p->getValor()."' WHERE id='".$p->getId()."'";;
+            $sql = "UPDATE pecas SET nome = '".$p->getNome()."', descricao = '".$p->getDescricao()."', valor = '".$p->getValor()."' WHERE id='".$p->getId()."'";
 
             //die($sql);
 
@@ -79,18 +75,15 @@
             $this->con->executar($sql);
             $this->con->desconectar();
         }
-        function deletar(Peca $p){
+        function deletar($p){
 
             //CÓDIGO DE DELETAR - DELETE
             //======== !!!!!!!!!! acertar o comando Mysql !!!!!!!!!! ==========
-            $sql = "DELETE FROM pecas WHERE id=".$p->getId();
+            $sql = "DELETE FROM pecas WHERE id=".$p;
 
             $this->con->conectar();
             $this->con->executar($sql);
             $this->con->desconectar();
         }
     }
-
-
-
 ?>
