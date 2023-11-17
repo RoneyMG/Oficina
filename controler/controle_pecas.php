@@ -16,9 +16,9 @@
         function inserir(Peca $p){
             if (empty($p->getNome()))
                 die("Informe o Nome para salvar.");
-            if (empty($s->getDescricao()))
+            if (empty($p->getDescricao()))
                 die("Informe a descrição.");
-            if (empty($s->getValor()))
+            if (empty($p->getValor()))
                 die("Informe o valor.");
             $this->daoPeca->inserir($p);
         }

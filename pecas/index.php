@@ -2,7 +2,6 @@
 
 require_once ("../controler/controle_pecas.php");
 require_once ("../model/peca.php");
-
 /*
 $peca = new Peca();
 $peca->setId(4);
@@ -12,10 +11,10 @@ $peca->setValor("195.50");*/
 
 switch($_SERVER['REQUEST_METHOD'])
 {
-    case 'POST': POST();break;
-    case 'PUT': PUT($_PUT);break;
-    case 'DELETE': DELETE();break;
-    default : GET($_GET);break;
+    case 'POST': POST(); break;
+    case 'PUT': PUT($_PUT); break;
+    case 'DELETE': DELETE(); break;
+    default : GET($_GET); break;
 }
 
 function GET($busca){
@@ -26,6 +25,7 @@ function GET($busca){
 }
 
 function POST(){
+    echo "Inicio Post";
     $peca = file_get_contents('php://input');
     $pc = json_decode($peca);
     $controlePeca = new ControlerPecas();
@@ -34,13 +34,13 @@ function POST(){
     $p->descricao = $pc->descricao;
     $p->valor = $pc->valor;
     $controlePeca->inserir($p);
-
+    echo "Final Post";
 }
 
 function DELETE(){
     $idPeca = file_get_contents('php://input');
     $controlePeca = new ControlerPecas();
-    $controleCliente->deletar($idPeca);
+    $controlePeca->deletar($idPeca);
 }
 
 /*=== FUNÇÕES CHAMADAS - 1 POR VEZ ===
