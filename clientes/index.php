@@ -3,11 +3,10 @@
     require_once ("../controler/controle_clientes.php");
     require_once ("../model/cliente.php");
 
-    //print_r($_SERVER['REQUEST_METHOD']);
+   
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST': POST(); break;
-        case 'PUT': PUT($_PUT); break;
         case 'DELETE': DELETE(); break;
         default : GET($_GET); break;
     }
@@ -26,11 +25,23 @@
         $c->telefone = $cli->telefone;
         $c->cpf = $cli->cpf;
         $c->endereco = $cli->endereco;
-        $controleCliente->inserir($c);
+		
+		if(property_exists($cli, 'id')){
+			
+			print_r($cli);
+			
+			$c->id = $cli->id;
+			$controleCliente->atualizar($c);
+		}else{
+			echo 'atualizando';
+			$controleCliente->inserir($c);
+		}
+        
     }
     function DELETE(){
         $idCLiente = file_get_contents('php://input');
         $controleCliente = new ControlerClientes();
         $controleCliente->deletar($idCLiente);
     }
+	
 ?>
