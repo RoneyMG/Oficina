@@ -54,11 +54,11 @@
             $retorno = $this->con->buscar($sql);
             foreach ($retorno as $r){
                 //$servico = $this->preencherServicos($r);    
-                $peca = new Peca();
-                $peca->setId($r[0]['id']);
-                $peca->setNome($r[0]['nome']);
-                $peca->setDescricao($r[0]['descricao']);
-                $peca->setValor($r[0]['valor']);
+                $servico = new Servico();
+                $servico->setId($r['id']);
+                $servico->setNome($r['nome']);
+                $servico->setDescricao($r['descricao']);
+                $servico->setValor($r['valor']);
                 array_push($lista, $servico);
             }
             $this->con->desconectar();
@@ -86,7 +86,7 @@
             $this->con->executar($sql);
             $this->con->desconectar();
         }
-        function deletar(Servico $s){
+        function deletar($s){
 
             //$sql = "DELETE FROM servicos WHERE id=".$s->getId();
             $sql = "DELETE FROM servicos WHERE id=".$s;
