@@ -23,9 +23,10 @@
             $this->daoPeca->inserir($p);
         }
         function atualizar(Peca $p){
+            
             if (empty($p->getId()))
             die("Informe o ID.");
-
+            
             $this->daoPeca->atualizar($p);
         }
         function deletar($p){//Ver se na funcao é para inserir Peca.

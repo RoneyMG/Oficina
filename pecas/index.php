@@ -12,7 +12,7 @@ $peca->setValor("195.50");*/
 switch($_SERVER['REQUEST_METHOD'])
 {
     case 'POST': POST(); break;
-    case 'PUT': PUT($_PUT); break;
+    case 'PUT': PUT($_PUT); break; //Descontinuado na atualização da modificação
     case 'DELETE': DELETE(); break;
     default : GET($_GET); break;
 }
@@ -25,7 +25,6 @@ function GET($busca){
 }
 
 function POST(){
-    echo "Inicio Post";
     $peca = file_get_contents('php://input');
     $pc = json_decode($peca);
     $controlePeca = new ControlerPecas();
@@ -33,8 +32,17 @@ function POST(){
     $p->nome = $pc->nome;
     $p->descricao = $pc->descricao;
     $p->valor = $pc->valor;
-    $controlePeca->inserir($p);
-    echo "Final Post";
+    
+    if(property_exists($pc, 'id')){
+
+        print_r($pc);
+
+        $p->id = $pc->id;
+        $controlePeca->atualizar($p);
+    }else{
+        echo 'atualizando';
+        $controlePeca->inserir($p);
+    }
 }
 
 function DELETE(){
